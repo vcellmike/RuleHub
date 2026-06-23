@@ -53,7 +53,11 @@ features:
   uses_anchors: boolean
   uses_multiple_identical_sites: boolean
   uses_deletes_molecules: boolean
-  uses_exclude_include_reactants: boolean  
+  uses_exclude_include_reactants: boolean
+  uses_generate_network: boolean	
+  default_sim_command: 
+    enum(ode, ssa, nf, pla, hybrid,molclustpy,vcell) # default simulation command for the model, if any
+
 
 source:
   origin: enum(published, contributed, ai-generated, ported-from-sbml, tutorial, test-case)
