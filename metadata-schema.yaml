@@ -37,6 +37,7 @@ compatibility:
   rr_compatible: boolean     
   bnglviz_compatible: boolean
   vcell_compatible: boolean
+  molclustpy_compatible: boolean
   vcell_errors: string
   simulation_methods:
     - enum(ode, ssa, nf, pla, hybrid, molclustpy, vcell)
