@@ -12,6 +12,7 @@ contributors:
   - name: string
 
 citation:
+  year: string  # 4 digits
   doi: string     # DOI only, no link
   pmid: string    # PubMed ID only, no link
   url: string      # either journal link or preprint link or website link
