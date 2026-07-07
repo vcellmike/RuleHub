@@ -27,6 +27,7 @@ begin parameters
     XBP1_mRNA 1000     # The splicing substrate
     Target_mRNA 800    # RIDD substrate
     BiP_tot 300
+    Unfolded_tot 10
 end parameters
 
 begin molecule types
@@ -34,21 +35,21 @@ begin molecule types
     BiP(b)
     Unfolded(b)
     XBP1(s~u~s)        # u: unspliced,s: spliced
-    RIDD_Target()      # Vulnerable mRNA pool
+    RIDD_Target(s)      # Vulnerable mRNA pool
 end molecule types
 
 begin seed species
     IRE1(b,s~U) IRE1_tot
     BiP(b) BiP_tot
-    Unfolded(b) 10
+    Unfolded(b) Unfolded_tot
     XBP1(s~u) XBP1_mRNA
-    RIDD_Target() Target_mRNA
+    RIDD_Target(s) Target_mRNA
 end seed species
 
 begin observables
     # KEY BIOLOGICAL OUTPUTS
     Molecules ProSurvival_XBP1 XBP1(s~s)                # Adaptive output
-    Molecules RIDD_Drive       RIDD_Target()            # Destructive output (mRNA decay)
+    Molecules RIDD_Drive       RIDD_Target(s)            # Destructive output (mRNA decay)
     Molecules Active_IRE1      IRE1(s~P)                # Signaling sensor status
     Molecules Stress_Burden    Unfolded()              # Unbuffered protein load
     Molecules Chaperone_Bip   BiP()                    # ER capacity index
@@ -77,7 +78,7 @@ begin reaction rules
     IRE1(s~P) + XBP1(s~u) -> IRE1(s~P) + XBP1(s~s) k_xbp1_splice
     
     # RIDD: Active IRE1 degrades target mRNAs (Functional Rate)
-    RIDD_Target() -> 0 v_ridd()
+    RIDD_Target(s) -> 0 v_ridd()
     
     ## ADAPTATION Stage
     # Spliced XBP1 induces BiP (Hill-driven burst)
@@ -90,7 +91,7 @@ begin reaction rules
     ## RESET Phase
     IRE1(s~P) -> IRE1(s~U) k_reset
     XBP1(s~s) -> 0 0.05
-    0 -> RIDD_Target() 0.1
+    0 -> RIDD_Target(s) 0.1
 end reaction rules
 
 begin actions
