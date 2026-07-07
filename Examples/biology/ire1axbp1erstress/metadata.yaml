@@ -20,7 +20,7 @@ compatibility:
   rr_compatible: true
   bnglviz_compatible: true
   bng2_compatible: true
-  bngp_compatible: true 
+  bngp_compatible: true
   vcell_compatible: false
   vcell_errors: "Encountered -> at line 69"
   simulation_methods: ["ode", "ssa"]
@@ -28,7 +28,7 @@ compatibility:
   uses_energy: false
   uses_functions: true
   uses_compartments: false
-  nfsim_compatible: true 
+  nfsim_compatible: true
 
 Features:
   uses_generate_network: true
